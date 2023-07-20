@@ -37,7 +37,6 @@ function playRound(playerChoice, computerChoice){
         console.log('Please enter a valid value');
         playRound();
     }
-    //console.log(result);
 
     return result;
 }
@@ -48,25 +47,21 @@ function game(){
     let computerScore = 0;
     let result;
 
-    for (i = 1; i < 5; i++){
+    for (i = 1; i <= 5; i++){
         result = playRound();
-        console.log(result);
 
         if (result === 'win') {
             playerScore += 1;
-            console.log('You won this round!');
+            console.log(`${i}. You won this round!`);
         }
         else if (result === 'lose'){
             computerScore += 1;
-            console.log('You lost this round!');
+            console.log(`${i}. You lost this round!`);
         }
         else {
-            console.log('It is a tie!');
+            console.log(`${i}. It is a tie!`);
         }
-        if (i != 5){
-            playRound();
-        }
-        else {
+        if (i == 5){
             if (playerScore > computerScore) {
                 console.log('You won the game!');
             }
@@ -88,6 +83,7 @@ function game(){
             }
         }
     }
+    return 'Thanks for playing!';
 }
 
 console.log(game());
