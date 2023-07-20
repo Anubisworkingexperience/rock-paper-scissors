@@ -15,40 +15,78 @@ function getComputerChoice(){
 function playRound(playerChoice, computerChoice){
     playerChoice = prompt('Choose "Rock", "Paper" or "Scissors"').toLowerCase();
     computerChoice = getComputerChoice();
-    let playerScore = 0;
-    let computerScore = 0;
 
     let result;
+
+    if (playerChoice === 'rock' || playerChoice === 'paper' ||
+     playerChoice === 'scissors'){
 
     if ((playerChoice === 'rock' && computerChoice === 'scissors')
     || (playerChoice === 'paper' && computerChoice === 'rock')
     || (playerChoice === 'scissors' && computerChoice === 'paper')){
-        result = `You win! ${playerChoice} beats ${computerChoice}`;
-        playerScore += 1;
+        result = 'win';
     }
     else if (playerChoice === computerChoice) {
-        result = `It's a tie! You had ${playerChoice} and computer had ${computerChoice}`;
+        result = 'tie';
     }
     else {
-        result = result = `You lose! ${computerChoice} beats ${playerChoice}`;
-        computerScore += 1;
+        result = 'lose';
     }
+    }
+    else {
+        console.log('Please enter a valid value');
+        playRound();
+    }
+    //console.log(result);
 
-    let score = playerScore > computerScore;
-
-    return score;
+    return result;
 }
 
-function scoreHandler(playerScore, computerScore){
 
-}
+function game(){
+    let playerScore = 0;
+    let computerScore = 0;
+    let result;
 
+    for (i = 1; i < 5; i++){
+        result = playRound();
+        console.log(result);
 
-function game(score){
-    score = playRound();
-    
-    for (i = 1; i <= 5; i++){
-        console.log(playRound());
+        if (result === 'win') {
+            playerScore += 1;
+            console.log('You won this round!');
+        }
+        else if (result === 'lose'){
+            computerScore += 1;
+            console.log('You lost this round!');
+        }
+        else {
+            console.log('It is a tie!');
+        }
+        if (i != 5){
+            playRound();
+        }
+        else {
+            if (playerScore > computerScore) {
+                console.log('You won the game!');
+            }
+             // 5 ties in a row
+            else if (playerScore === computerScore){
+                while (result != 'win' || result != 'lose') {
+                    playRound();
+                }
+                if (result === 'win') {
+                    console.log('You won the game!');
+                }
+                else {
+                    console.log('You lost the game!');
+                }
+            }
+            //
+            else {
+                console.log('You lost the game!');
+            }
+        }
     }
 }
 
