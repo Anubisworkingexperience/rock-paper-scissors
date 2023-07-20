@@ -49,6 +49,7 @@ function game(){
 
     for (i = 1; i <= 5; i++){
         result = playRound();
+        
 
         if (result === 'win') {
             playerScore += 1;
@@ -65,12 +66,10 @@ function game(){
             if (playerScore > computerScore) {
                 console.log('You won the game!');
             }
-             // 5 ties in a row
+             // equal score
             else if (playerScore === computerScore){
-                while (result != 'win' || result != 'lose') {
-                    playRound();
-                }
-                if (result === 'win') {
+                let randomDecider = Math.floor((Math.random() * 2));
+                if (randomDecider === 0) {
                     console.log('You won the game!');
                 }
                 else {

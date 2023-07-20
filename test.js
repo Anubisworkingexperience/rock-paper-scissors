@@ -1,7 +1,6 @@
-function idk() {
-    return 'temp';
-}
+// this is just a testing file which is used to test things and not the
+//project itself
 
-let result = idk();
+let randomDecider = Math.floor((Math.random() * 2));
 
-console.log(result);
+console.log(randomDecider);
