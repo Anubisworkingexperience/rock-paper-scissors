@@ -12,7 +12,7 @@ function getComputerChoice(){
 }
 
 
-function playRound(playerChoice, computerChoice){
+/*function playRound(playerChoice, computerChoice){
     playerChoice = prompt('Choose "Rock", "Paper" or "Scissors"').toLowerCase();
     computerChoice = getComputerChoice();
 
@@ -85,4 +85,4 @@ function game(){
     return 'Thanks for playing!';
 }
 
-console.log(game());
+console.log(game()); */
