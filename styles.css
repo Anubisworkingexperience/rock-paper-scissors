@@ -1,8 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;1,700&display=swap');
 
-* {
-    border: 2px solid red;
-}
 
 
 body {
@@ -51,7 +48,7 @@ img {
     padding: 25px;
     border: 6px solid grey;
 }
-.tool:hover, .name:hover, a:hover, .chooseTitle:hover{
+.tool:hover, .name:hover, a:hover, .chooseTitle:hover, .fight:hover {
     transform: scale(1.1);
 }
 .tool:hover, .tool:focus {
@@ -123,3 +120,8 @@ img {
     color: blue;
 }
 
+.fight {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
