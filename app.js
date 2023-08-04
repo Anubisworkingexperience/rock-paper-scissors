@@ -11,78 +11,108 @@ function getComputerChoice(){
     }
 }
 
+function playRound(playerChoice, computerChoice){
 
-/*function playRound(playerChoice, computerChoice){
-    playerChoice = prompt('Choose "Rock", "Paper" or "Scissors"').toLowerCase();
+    function getResult(){
+        let result;
+        if (playerChoice === 'rock' || playerChoice === 'paper' ||
+        playerChoice === 'scissors'){
+
+        if ((playerChoice === 'rock' && computerChoice === 'scissors')
+        || (playerChoice === 'paper' && computerChoice === 'rock')
+        || (playerChoice === 'scissors' && computerChoice === 'paper')){
+            result = 'win';
+        }
+        else if (playerChoice === computerChoice) {
+            result = 'tie';
+        }
+        else {
+            result = 'lose';
+        }
+        }
+        return result;
+    }
+
+    let firstTool = true;
+    const rock = document.querySelector('.rock');
+    const paper = document.querySelector('.paper');
+    const scissors = document.querySelector('.scissors');
+
     computerChoice = getComputerChoice();
 
-    let result;
+    let promise =  new Promise((resolve) => {
+        rock.addEventListener('click', () => {
+            if (firstTool) {
+                playerChoice = 'rock';
+                firstTool = false; 
+                const result = getResult();
+                resolve(result);
+            }
+        });
 
-    if (playerChoice === 'rock' || playerChoice === 'paper' ||
-     playerChoice === 'scissors'){
-
-    if ((playerChoice === 'rock' && computerChoice === 'scissors')
-    || (playerChoice === 'paper' && computerChoice === 'rock')
-    || (playerChoice === 'scissors' && computerChoice === 'paper')){
-        result = 'win';
-    }
-    else if (playerChoice === computerChoice) {
-        result = 'tie';
-    }
-    else {
-        result = 'lose';
-    }
-    }
-    else {
-        console.log('Please enter a valid value');
-        playRound();
-    }
-
-    return result;
+        paper.addEventListener('click', () => {
+            if (firstTool) {
+                playerChoice = 'paper';
+                firstTool = false;
+                const result = getResult();
+                resolve(result);
+                }
+        });
+        scissors.addEventListener('click', () => {
+            if (firstTool) {
+                playerChoice = 'scissors';
+                firstTool = false;
+                const result = getResult();
+                resolve(result);
+                }
+        });
+    });
+    return promise;
 }
 
 
+let playerScore = 0;
+let computerScore = 0;
+
 function game(){
-    let playerScore = 0;
-    let computerScore = 0;
-    let result;
-
-    for (i = 1; i <= 5; i++){
-        result = playRound();
-        
-
+    const playerLives = document.querySelectorAll('.playerHearts');
+    const computerHearts = document.querySelectorAll('.computerHearts');
+    const maxWins = 5;
+    
+    function handleResult(result) {
         if (result === 'win') {
             playerScore += 1;
-            console.log(`${i}. You won this round!`);
+            console.log(`You won this round!`, playerScore, computerScore);
         }
         else if (result === 'lose'){
             computerScore += 1;
-            console.log(`${i}. You lost this round!`);
+            console.log(`You lost this round!`, playerScore, computerScore);
         }
         else {
-            console.log(`${i}. It is a tie!`);
+            console.log(`It is a tie!`, playerScore, computerScore);
         }
-        if (i == 5){
-            if (playerScore > computerScore) {
-                console.log('You won the game!');
-            }
-             // equal score
-            else if (playerScore === computerScore){
-                let randomDecider = Math.floor((Math.random() * 2));
-                if (randomDecider === 0) {
-                    console.log('You won the game!');
-                }
-                else {
-                    console.log('You lost the game!');
-                }
-            }
-            //
-            else {
-                console.log('You lost the game!');
-            }
+        if (playerScore == maxWins){
+            console.log('You won the game!');
+            resetGame();
+        }
+    
+        else if (computerScore == maxWins){
+            console.log('You lost the game!');
+            resetGame();
         }
     }
-    return 'Thanks for playing!';
+
+    function resetGame() {
+        playerScore = 0;
+        computerScore = 0;
+        console.log('Game reset');
+    }
+
+    playRound().then((result) => {
+        handleResult(result);
+        console.log(result);
+        console.log(game());
+    });
 }
 
-console.log(game()); */
+console.log(game()); 

@@ -47,6 +47,7 @@ img {
     border-radius: 30px;
     padding: 25px;
     border: 6px solid grey;
+    cursor: pointer;
 }
 .tool:hover, .name:hover, a:hover, .chooseTitle:hover, .fight:hover {
     transform: scale(1.1);
