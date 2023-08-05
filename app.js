@@ -73,23 +73,48 @@ function playRound(playerChoice, computerChoice){
 
 let playerScore = 0;
 let computerScore = 0;
+let firstInsertion = true;
+const info = document.createElement('p');
+info.style.fontSize = '24px';
+info.style.display = 'flex';
+info.style.justifyContent = 'center';
 
 function game(){
     const playerLives = document.querySelectorAll('.playerHearts');
     const computerHearts = document.querySelectorAll('.computerHearts');
     const maxWins = 5;
-    
+    const footer = document.querySelector('.footer');
+    const content = document.querySelector('.content');
+
     function handleResult(result) {
         if (result === 'win') {
             playerScore += 1;
             console.log(`You won this round!`, playerScore, computerScore);
+            info.textContent = 'You won this round!';
+            info.style.color = 'green';
+            if (firstInsertion) {
+            content.insertBefore(info, footer);
+            }
+            firstInsertion = false;
         }
         else if (result === 'lose'){
             computerScore += 1;
             console.log(`You lost this round!`, playerScore, computerScore);
+            info.textContent = 'You lost this round!';
+            info.style.color = 'red';
+            if (firstInsertion) {
+                content.insertBefore(info, footer);
+                }
+            firstInsertion = false;
         }
         else {
             console.log(`It is a tie!`, playerScore, computerScore);
+            info.textContent = 'It is a tie!';
+            info.style.color = 'orange';
+            if (firstInsertion) {
+                content.insertBefore(info, footer);
+                }
+            firstInsertion = false;
         }
         if (playerScore == maxWins){
             console.log('You won the game!');
@@ -110,7 +135,6 @@ function game(){
 
     playRound().then((result) => {
         handleResult(result);
-        console.log(result);
         console.log(game());
     });
 }

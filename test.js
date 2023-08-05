@@ -1,22 +1,13 @@
 // this is just a testing file which is used to test things and not the
 //project itself
 
-const rock = document.querySelector('.rock');
-const paper = document.querySelector('.paper');
-const scissors = document.querySelector('.scissors');
+const info = document.createElement('p');
 
-let firstTool = true;
-let playerChoice = '';
+/*TODO
+    1. Working info text
+    2. Lives removing depending on score
+    3. Winning and losing overlay
+    4. Computer text box when losing or winning or tieing rounds
+*/
 
-console.info(rock.outerHTML);
 
-if (playerChoice != 'rock') {
-rock.addEventListener('click', () => {
-    if (firstTool) {
-    playerChoice = 'rock';
-    firstTool = false;
-    }
-});
-}
-
-console.log(firstTool, playerChoice);
