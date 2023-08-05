@@ -79,15 +79,21 @@ info.style.fontSize = '24px';
 info.style.display = 'flex';
 info.style.justifyContent = 'center';
 
+
 function game(){
-    const playerLives = document.querySelectorAll('.playerHearts');
-    const computerHearts = document.querySelectorAll('.computerHearts');
+    const playerLives = document.querySelectorAll('.playerHeart');
+    const computerLives = document.querySelectorAll('.computerHeart');
+    const playerLivesContainer = document.querySelector('.playerHearts');
+    const computerLivesContainer = document.querySelector('.computerHearts');
     const maxWins = 5;
     const footer = document.querySelector('.footer');
     const content = document.querySelector('.content');
 
     function handleResult(result) {
         if (result === 'win') {
+            //removing computer lives after win
+            computerLivesContainer.removeChild(computerLives[computerLives.length - 1]);
+
             playerScore += 1;
             console.log(`You won this round!`, playerScore, computerScore);
             info.textContent = 'You won this round!';
@@ -98,6 +104,9 @@ function game(){
             firstInsertion = false;
         }
         else if (result === 'lose'){
+            //removing player lives after lose
+            playerLivesContainer.removeChild(playerLives[playerLives.length - 1]);
+
             computerScore += 1;
             console.log(`You lost this round!`, playerScore, computerScore);
             info.textContent = 'You lost this round!';
