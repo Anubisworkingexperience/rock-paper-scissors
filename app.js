@@ -88,6 +88,14 @@ function game(){
     const maxWins = 5;
     const footer = document.querySelector('.footer');
     const content = document.querySelector('.content');
+    const robotMessage = document.createElement('span');
+
+    //message from robot which appears when losing or winning
+    robotMessage.style.color = 'black';
+    robotMessage.style.fontSize = '24px';
+    robotMessage.style.border = '4px solid black';
+    robotMessage.style.padding = '10px';
+    robotMessage.style.width = '300px';
 
     function handleResult(result) {
         if (result === 'win') {
@@ -125,20 +133,69 @@ function game(){
                 }
             firstInsertion = false;
         }
+        const resultText = document.createElement('span');
+        const modalContent = document.querySelector('.modalContent');
+        
+        
+        resultText.style.fontSize = '40px';
+        resultText.style.display = 'flex';
+        resultText.style.justifyContent = 'center';
+
         if (playerScore == maxWins){
             console.log('You won the game!');
+            resultText.textContent = 'You won!';
+            resultText.style.color = 'green';
+            robotMessage.textContent = "You managed to win me... It's really impressive! Let's play again! I won't go easy now!";
+            modalContent.appendChild(resultText);
             resetGame();
+            
         }
     
         else if (computerScore == maxWins){
             console.log('You lost the game!');
+            resultText.textContent = 'You lost!';
+            resultText.style.color = 'red';
+            robotMessage.textContent = "Ha! Did you really think you'd win? I never lose! We can play again but I don't think you have any chances";
+            modalContent.appendChild(resultText);
             resetGame();
         }
     }
 
     function resetGame() {
-        playerScore = 0;
-        computerScore = 0;
+        const modal = document.querySelector('.modal');
+        const modalContent = document.querySelector('.modalContent');
+        const robotImage = document.createElement('img');
+        const retry = document.createElement('a');
+        const retryContainer = document.createElement('div');
+
+        robotImage.src = './images/ai.png';
+        retry.textContent = 'Play again';
+        robotImage.style.width = '150px';
+        robotImage.style.height = '150px';
+
+        modalContent.appendChild(robotImage);
+        modalContent.appendChild(retryContainer);
+
+        modalContent.style.display = 'flex';
+        modalContent.style.flexDirection = 'column';
+        modal.style.display = 'block';
+
+        modalContent.insertBefore(robotMessage, retryContainer);
+
+        retry.style.display = 'flex';
+        retry.style.justifyContent = 'center';
+        retry.style.alignItems = 'center';
+        retry.style.width = '100px';
+        retry.style.borderRadius = '10px'; 
+        retry.href = './index.html';
+        retry.style.padding = '10px';
+        retry.style.color = 'purple';
+        retry.style.border = '2px solid black';
+
+        retryContainer.style.display = 'flex';
+        retryContainer.style.justifyContent = 'center';
+        retryContainer.appendChild(retry);
+
         console.log('Game reset');
     }
 
